@@ -1,0 +1,63 @@
+ORG 0000h
+
+    LJMP main
+
+    ORG 0040h
+
+    main: MOV R0,#03h                     ; Initializing first number
+
+          MOV R1,#06h                     ; Initializing second number
+
+          MOV R2,#01h                     ; Initializing counter register(Rd)
+
+          MOV A,R0
+
+          MOV B,R1
+
+          CJNE A,B,label1                 ; Comparing both numbers for equality       
+
+          MOV R4,A 
+
+          SJMP stop
+
+  label1: JNC loop                ; Comparing and swapping values if num1 is less than num2
+
+          MOV A,R1
+
+          MOV B,R0
+
+          MOV R0,A
+
+          MOV R1,B
+
+  loop:   MOV A,R2        ; loop to find LCM
+
+          MOV B,R0
+
+          CJNE A,B,next   ; comparing if Rd value and num1 are equal
+
+          SJMP stop
+
+  next:   MOV A,R1        ; Finding product of num2 and Rd
+
+          MOV B,R2
+
+          MUL AB
+
+          MOV R4,A        ; Storing product 
+
+          INC R2
+
+          MOV B,R0
+
+          DIV AB          ; Dividing by num1 to find reminder
+
+          MOV R3,B
+
+          CJNE R3,#00h,loop ; Continue until reminder becomes zero
+
+          SJMP stop
+
+  stop:   JMP stop
+
+END
