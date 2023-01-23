@@ -1,0 +1,11 @@
+LDA 2050	ANI 01	
+
+JZ 200D	
+
+MVI A 11	
+
+JMP 200F	
+
+MVI A 22	
+
+STA 3050
